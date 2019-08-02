@@ -1,10 +1,23 @@
 import React from "react";
+import { Button } from "@material-ui/core";
 
 const Note = props => {
   return (
-    <div>
+    <div
+      style={
+        props.importance === "important"
+          ? { background: "red" }
+          : props.importance === "medium"
+          ? { background: "yellow" }
+          : { background: "green" }
+      }
+    >
       {props.content}
-      <span>{props.importance}</span>
+      <span
+        onClick={() => props.onPressDelete(props.timeOfCreation, props.note)}
+      >
+        X
+      </span>
     </div>
   );
 };

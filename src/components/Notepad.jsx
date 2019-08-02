@@ -8,6 +8,7 @@ import { green, yellow } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
 
 import { withStyles } from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
 
 const GreenRadio = withStyles({
   root: {
@@ -35,7 +36,8 @@ export default class Notepad extends PureComponent {
     this.state = {
       selectedValue: "important",
       noteObject: {},
-      notes: []
+      notes: JSON.parse(localStorage.getItem("note")) || [],
+      noteValue: ""
     };
   }
 
@@ -45,13 +47,19 @@ export default class Notepad extends PureComponent {
     this.setState({ selectedValue: value });
   };
 
+  handleChangeInput = event => {
+    const { value } = event.target;
+
+    this.setState({ noteValue: value });
+  };
+
   handleKeyDown = event => {
     const {
       key,
       target: { value }
     } = event;
 
-    const { selectedValue, notes, noteObject } = this.state;
+    const { selectedValue, notes } = this.state;
 
     if (key === "Enter") {
       this.setState(
@@ -64,19 +72,30 @@ export default class Notepad extends PureComponent {
         },
         () =>
           this.setState({ notes: [...notes, this.state.noteObject] }, () => {
-            console.log(this.state.notes, "<-----");
-
             return localStorage.setItem(
               "note",
-              JSON.stringify(this.state.notes)
+              JSON.stringify(this.state.notes),
+              this.setState({ noteValue: "" })
             );
           })
       );
     }
   };
+
+  onPressDelete = (id, note) => {
+    const { notes } = this.state;
+    console.log(id, note, notes, "ko<-----");
+    this.setState(
+      {
+        notes: notes.filter(singleNote => singleNote.timeOfCreation !== id)
+      },
+      () => {
+        return localStorage.setItem("note", JSON.stringify(this.state.notes));
+      }
+    );
+  };
   render() {
     const { selectedValue, notes } = this.state;
-    console.log(selectedValue, notes, "<====firstlog");
 
     return (
       <Container
@@ -91,9 +110,12 @@ export default class Notepad extends PureComponent {
             {" "}
             <Input
               placeholder="Place notes here"
+              name="notesValue"
+              value={this.state.noteValue}
               inputProps={{
-                "aria-label": "description"
+                "aria-label": "notes"
               }}
+              onChange={this.handleChangeInput}
               onKeyDown={this.handleKeyDown}
             />
             <span>Important</span>
@@ -122,15 +144,26 @@ export default class Notepad extends PureComponent {
             />
           </Paper>
           <Paper>
-            {JSON.parse(localStorage.getItem("note")) &&
-              JSON.parse(localStorage.getItem("note")).map(noteDescription => (
+            {notes &&
+              notes.length &&
+              notes.map(noteDescription => (
                 <Note
+                  onPressDelete={this.onPressDelete}
+                  note={noteDescription}
                   key={noteDescription.timeOfCreation}
+                  timeOfCreation={noteDescription.timeOfCreation}
                   content={noteDescription.content}
                   importance={noteDescription.importance}
                 />
               ))}
           </Paper>
+          <Button
+            onClick={() =>
+              this.setState({ notes: [] }, () => localStorage.clear())
+            }
+          >
+            Clear All
+          </Button>
         </Card>
       </Container>
     );
