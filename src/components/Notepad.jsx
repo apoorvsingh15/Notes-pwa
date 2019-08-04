@@ -6,7 +6,6 @@ import Paper from "@material-ui/core/Paper";
 import Input from "@material-ui/core/Input";
 import { green, yellow } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
-
 import { withStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 
@@ -33,6 +32,7 @@ const YellowRadio = withStyles({
 export default class Notepad extends PureComponent {
   constructor(props) {
     super(props);
+
     this.state = {
       selectedValue: "important",
       noteObject: {},
@@ -104,7 +104,7 @@ export default class Notepad extends PureComponent {
         }}
         maxWidth="sm"
       >
-        <Card>
+        <Card className="effect5">
           <h1 className="header">Elegant Notes</h1>
           <Paper>
             {" "}
@@ -118,7 +118,7 @@ export default class Notepad extends PureComponent {
               onChange={this.handleChangeInput}
               onKeyDown={this.handleKeyDown}
             />
-            <span>Important</span>
+            <span>High</span>
             <Radio
               checked={selectedValue === "important"}
               onChange={this.handleChange}
@@ -134,7 +134,7 @@ export default class Notepad extends PureComponent {
               name="radio-button-demo"
               inputProps={{ "aria-label": "MEDIUM" }}
             />
-            <span>Not Important</span>
+            <span>Low</span>
             <GreenRadio
               checked={selectedValue === "not-important"}
               onChange={this.handleChange}
@@ -143,21 +143,22 @@ export default class Notepad extends PureComponent {
               inputProps={{ "aria-label": "NOT-IMPORTANT" }}
             />
           </Paper>
-          <Paper>
-            {notes &&
-              notes.length &&
-              notes.map(noteDescription => (
-                <Note
-                  onPressDelete={this.onPressDelete}
-                  note={noteDescription}
-                  key={noteDescription.timeOfCreation}
-                  timeOfCreation={noteDescription.timeOfCreation}
-                  content={noteDescription.content}
-                  importance={noteDescription.importance}
-                />
-              ))}
+          <Paper style={{ maxHeight: "250px", overflow: "scroll" }}>
+            {notes && notes.length
+              ? notes.map(noteDescription => (
+                  <Note
+                    onPressDelete={this.onPressDelete}
+                    note={noteDescription}
+                    key={noteDescription.timeOfCreation}
+                    timeOfCreation={noteDescription.timeOfCreation}
+                    content={noteDescription.content}
+                    importance={noteDescription.importance}
+                  />
+                ))
+              : null}
           </Paper>
           <Button
+            style={{ padding: 20, width: "100%" }}
             onClick={() =>
               this.setState({ notes: [] }, () => localStorage.clear())
             }

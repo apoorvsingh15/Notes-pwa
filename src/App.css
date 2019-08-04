@@ -9,4 +9,53 @@ body {
 
 .header {
   padding: 30px;
+  text-shadow: 2px 2px 5px #777;
+}
+
+.effect5 {
+  position: relative;
+}
+.effect5:before,
+.effect5:after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 25px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  -webkit-box-shadow: 0 35px 20px #777;
+  -moz-box-shadow: 0 35px 20px #777;
+  box-shadow: 0 35px 20px #777;
+  -webkit-transform: rotate(-8deg);
+  -moz-transform: rotate(-8deg);
+  -o-transform: rotate(-8deg);
+  -ms-transform: rotate(-8deg);
+  transform: rotate(-8deg);
+}
+.effect5:after {
+  -webkit-transform: rotate(8deg);
+  -moz-transform: rotate(8deg);
+  -o-transform: rotate(8deg);
+  -ms-transform: rotate(8deg);
+  transform: rotate(8deg);
+  right: 10px;
+  left: auto;
+}
+
+.MuiPaper-elevation1 {
+  box-shadow: none !important;
+}
+
+.MuiInput-root {
+  position: relative;
+  width: 100%;
+}
+
+.MuiPaper-root {
+  margin: 10px;
+  margin-top: 0;
+  text-align: center;
 }
