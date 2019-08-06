@@ -7,3 +7,7 @@ Site live on : https://elegantnotes.netlify.com/
 ## TODO
 
 - Styling and making elegant notes more elegant
+
+## CONTRIBUTIONS
+
+- As you can pretty much tell, not that good of a designer, if you want to style the app please go ahead raise a pr and I will surely look into it and will give full credits to the contributor.
