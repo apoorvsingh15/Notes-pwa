@@ -59,3 +59,11 @@ body {
   margin-top: 0;
   text-align: center;
 }
+
+@media only screen and (max-width: 600px) {
+  body,
+  html {
+    background: white;
+    max-height: 100vh;
+  }
+}

@@ -143,7 +143,7 @@ export default class Notepad extends PureComponent {
               inputProps={{ "aria-label": "NOT-IMPORTANT" }}
             />
           </Paper>
-          <Paper style={{ maxHeight: "250px", overflow: "scroll" }}>
+          <Paper style={{ maxHeight: "50vh", overflow: "scroll" }}>
             {notes && notes.length
               ? notes.map(noteDescription => (
                   <Note

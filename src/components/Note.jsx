@@ -3,12 +3,28 @@ import Close from "@material-ui/icons/Close";
 const Note = props => {
   return (
     <div
+      className="effect5"
       style={
         props.importance === "important"
-          ? { background: "red", padding: 10, margin: 5 }
+          ? {
+              padding: 10,
+              margin: 15,
+              boxShadow:
+                "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)"
+            }
           : props.importance === "medium"
-          ? { background: "yellow", padding: 10, margin: 5 }
-          : { background: "green", padding: 10, margin: 5 }
+          ? {
+              padding: 10,
+              margin: 15,
+              boxShadow:
+                "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)"
+            }
+          : {
+              padding: 10,
+              margin: 15,
+              boxShadow:
+                "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)"
+            }
       }
     >
       {props.content}
