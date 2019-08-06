@@ -84,7 +84,7 @@ export default class Notepad extends PureComponent {
 
   onPressDelete = (id, note) => {
     const { notes } = this.state;
-    console.log(id, note, notes, "ko<-----");
+
     this.setState(
       {
         notes: notes.filter(singleNote => singleNote.timeOfCreation !== id)
